@@ -15,6 +15,7 @@ function userInterface()
 		this.references.word.text(parseInt(this.references.word.text()) + 1); 
 	}
 
+
 	this.ClearWord = function()
 	{
 		this.references.word.text(1);
