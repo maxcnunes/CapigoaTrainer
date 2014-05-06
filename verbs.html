@@ -1,62 +1,89 @@
-
-<html>
-<head>
+<html><head>
 	<title>Capigoat Verb Trainer</title>
-	<link rel="stylesheet" href="css/verbs.css" />
-	<link rel="icon" type="image/png" href="images/ghead.png" />
+	<link rel="stylesheet" href="css/verbs.css">
+	<link rel="icon" type="image/png" href="images/ghead.png">
 	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/enum.js"></script>
 	<script src="js/verbList.js"></script>
 	<script src="js/ui.js"></script>
+	<script src="js/controls.js"></script>
 	<script src="js/verbs.js"></script>
 </head>
 <body>
 	<header class="box">
 		<div class="headerPaddings fleft" id="imageHeader">CapigoaTrainer <div id="caption">verb trainer</div></div>
 		<div class="buttonsPaddings fright radioButtons">
-				<button class="active">Round One<br/><span class="mini">[1~50]</span></button>
-				<button>Round Two<br/><span class="mini">[51~100]</span></button>
-				<button>Round Three<br/><span class="mini">[101~150]</span></button>
-				<button>Round Four<br/><span class="mini">[151~199]</span></button>
-				<button>Round Five<br/><span class="mini">[1~100]</span></button>
-				<button>Round Six<br/><span class="mini">[101~199]</span></button>
-				<button>Round Seven+<br/><span class="mini">[1~199]</span></button>
+				<div id="r1" class="button">Round One<br><span class="mini">[1~50]</span></div>
+				<div id="r2" class="button">Round Two<br><span class="mini">[51~100]</span></div>
+				<div id="r3" class="button active">Round Three<br><span class="mini">[101~150]</span></div>
+				<div id="r4" class="button">Round Four<br><span class="mini">[150~199]</span></div>
+				<div id="r5" class="button">Round Five<br><span class="mini">[1~100]</span></div>
+				<div id="r6" class="button">Round Six<br><span class="mini">[101~199]</span></div>
+				<div id="r7" class="button">Round Seven+<br><span class="mini">[1~199]</span></div>
 		</div>
+		
 	</header>
+	<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer"><img id="gitHub" src="images/forkme4.png"></a>
 	<div class="content">
 		<div id="messages" class="box">
-			<div class="fleft inline">word <span id="word">1</span>/<span id="totalWords">100</span></div>
-			<div class="fright inline">score <span id="score">1</span>/<span id="totalScore">100</span></div>
+			<div class="fleft inline">word <span id="word">1</span>/<span id="totalWords">50</span></div>
+			<div class="fright inline">score <span id="score">0</span>/<span id="totalScore">100</span></div>
+			<div id="results" style="display: none;">
+				<div id="retry">Retry</div>
+				<div id="retryMissed" style="display: none;">Retry with words you missed</div>
+				<div id="fakeMissed" style="display: block;">Retry with words you missed</div>
+			</div>
 		</div>
-		<div id="dinamic">
-			<div class="currentWord"></div>
+		<div id="dinamic" style="display: block;">
+			<div id="currentWord">slay</div>
 			<div class="downContent">
-				<div class="command">Past Simple:</div>
-				<div class="userInput">
-					<input></input>
+				<div id="command">Past Simple:</div>
+				<div id="userInput">
+					<input>
 				</div>
 			</div>
 		</div>
 		<div class="dottedBox borderRadius">
 			<div class="dottedBorderCaption">Word History</div>
-			<div class="lastWord">
-				<ul>
+			<div class="wordHistory">
+				<ul class="historyHeader">
 					<li>Infinitive</li>
 					<li>Past Simple</li>
 					<li>Past Participle</li>
 				</ul>
+				<div id="wordWrapper"></div>
 			</div>
 		</div>
 
-		<div class="dottedBox borderRadius">
+		<div class="dottedBox borderRadius hidden">
 			<div class="dottedBorderCaption">Score History</div>
-			<div class="lastWord">
-				<div id="word">undefined</div>
-				<div id="firstAnswer">undefined</div>
-				<div id="secondAnswer">undefined</div>
+			<div class="scoreHistory">
+				<ul class="historyHeader">
+					<li>Round</li>
+					<li>Score</li>
+				</ul>
+				<div id="wordWrapper">
+					<ul>
+						<li>3</li>
+						<li>40/100</li>
+					</ul>
+					<ul>
+						<li>3</li>
+						<li>40/100</li>
+					</ul>
+					<ul>
+						<li>3</li>
+						<li>40/100</li>
+					</ul>
+					<ul>
+						<li>3</li>
+						<li>40/100</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
 	<footer>
 	</footer>
-</body>
-</html>
+
+</body></html>
