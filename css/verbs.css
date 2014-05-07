@@ -154,7 +154,7 @@ header {
 	font-size: 50px;
 	width: 300px;
 
-	background-color: inherit;
+	background-color: transparent;
 	border: none;
 	text-align: center;
 }
@@ -250,7 +250,7 @@ header {
 }
 
 .button:hover {
-	cursor: hand;
+	cursor: pointer;
 	color: lightgrey;
 }
 
@@ -274,7 +274,7 @@ header {
 #retry:hover, #retryMissed:hover{
 	color: lightgrey;
 	text-decoration: underline;
-	cursor: hand;
+	cursor: pointer;
 }
 
 #results div:first-child{
