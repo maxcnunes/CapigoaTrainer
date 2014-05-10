@@ -1,5 +1,5 @@
 $(function(){
-	
+
 	UI = new userInterface();
 	CTR = new Controls();
 	

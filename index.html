@@ -1,15 +1,18 @@
-<html><head>
+<html>
+<head>
 	<title>Capigoat Verb Trainer</title>
 	<link rel="stylesheet" href="css/verbs.css">
-	<link rel="icon" type="image/png" href="images/ghead.png">
+	<link rel="icon" type="image/png" href="images/cg-head.png">
 	<script src="js/jquery-1.11.0.min.js"></script>
-	<script src="js/enum.js"></script>
-	<script src="js/verbList.js"></script>
-	<script src="js/ui.js"></script>
-	<script src="js/controls.js"></script>
-	<script src="js/verbs.js"></script>
+	<script src="js/main.js"></script>
+
+	<script src="js/custom/enum.js"></script>
+	<script src="js/custom/verbList.js"></script>
+	<script src="js/custom/ui.js"></script>
+	<script src="js/custom/controls.js"></script>
 </head>
 <body>
+
 	<header class="box">
 		<div class="headerPaddings fleft" id="imageHeader">CapigoaTrainer <div id="caption">verb trainer</div></div>
 		<div class="buttonsPaddings fright radioButtons">
@@ -21,9 +24,9 @@
 				<div id="r6" class="button">Round Six<br><span class="mini">[101~200]</span></div>
 				<div id="r7" class="button">Round Seven+<br><span class="mini">[1~200]</span></div>
 		</div>
-		
 	</header>
-	<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer"><img id="gitHub" src="images/forkme4.png"></a>
+	
+	<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer"><img id="gitHub" src="images/github.png"></a>
 	<div class="content">
 		<div id="messages" class="box">
 			<div class="fleft inline">word <span id="word">1</span>/<span id="totalWords">50</span></div>
