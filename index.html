@@ -12,29 +12,30 @@
 	<script src="js/custom/controls.js"></script>
 </head>
 <body>
-
-	<header class="box">
-		<div class="headerPaddings fleft" id="imageHeader">CapigoaTrainer <div id="caption">verb trainer</div></div>
-		<div class="buttonsPaddings fright radioButtons">
-				<div id="r1" class="button active">Round One<br><span class="mini">[1~50]</span></div>
-				<div id="r2" class="button">Round Two<br><span class="mini">[51~100]</span></div>
-				<div id="r3" class="button">Round Three<br><span class="mini">[101~150]</span></div>
-				<div id="r4" class="button">Round Four<br><span class="mini">[151~200]</span></div>
-				<div id="r5" class="button">Round Five<br><span class="mini">[1~100]</span></div>
-				<div id="r6" class="button">Round Six<br><span class="mini">[101~200]</span></div>
-				<div id="r7" class="button">Round Seven+<br><span class="mini">[1~200]</span></div>
+	<header class="blackBox">
+		<div id="logo">CapigoaTrainer <div id="caption">verb trainer</div></div>
+		<div id="menu">
+			<a id="r1" class="active">Round One<div>[1~50]</div></a>
+			<a id="r2">Round Two<div>[51~100]</div></a>
+			<a id="r3">Round Three<div>[101~150]</div></a>
+			<a id="r4">Round Four<div>[151~200]</div></a>
+			<a id="r5">Round Five<div>[1~100]</div></a>
+			<a id="r6">Round Six<div>[101~200]</div></a>
+			<a id="r7">Round Seven+<div>[1~200]</div></a>
 		</div>
 	</header>
-	
-	<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer"><img id="gitHub" src="images/github.png"></a>
-	<div class="content">
-		<div id="messages" class="box">
-			<div class="fleft inline">word <span id="word">1</span>/<span id="totalWords">50</span></div>
-			<div class="fright inline">score <span id="score">0</span>/<span id="totalScore">100</span></div>
-			<div id="results" style="display: none;">
-				<div id="retry">Retry</div>
-				<div id="retryMissed" style="display: none;">Retry with words you missed</div>
-				<div id="fakeMissed" style="display: block;">Retry with words you missed</div>
+	<div id="gitHub">
+		<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer">
+			<img src="images/github.png">
+		</a>
+	</div>
+	<div id="content">
+		<div id="messages" class="blackBox">
+			<div>word <span id="word">1</span>/<span id="totalWords">50</span></div>
+			<div>score <span id="score">0</span>/<span id="totalScore">100</span></div>
+			<div id="results">
+				<a id="retry">Retry</a>
+				<a id="retryMissed">Retry with words you missed</a>
 			</div>
 		</div>
 		<div id="dinamic" style="display: block;">
@@ -55,34 +56,6 @@
 					<li>Past Participle</li>
 				</ul>
 				<div id="wordWrapper"></div>
-			</div>
-		</div>
-
-		<div class="dottedBox borderRadius hidden">
-			<div class="dottedBorderCaption">Score History</div>
-			<div class="scoreHistory">
-				<ul class="historyHeader">
-					<li>Round</li>
-					<li>Score</li>
-				</ul>
-				<div id="wordWrapper">
-					<ul>
-						<li>3</li>
-						<li>40/100</li>
-					</ul>
-					<ul>
-						<li>3</li>
-						<li>40/100</li>
-					</ul>
-					<ul>
-						<li>3</li>
-						<li>40/100</li>
-					</ul>
-					<ul>
-						<li>3</li>
-						<li>40/100</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</div>

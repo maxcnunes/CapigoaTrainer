@@ -10,10 +10,9 @@ function References()
 	this.wordHistoryList = $("#wordWrapper");
 	this.dinamic = $("#dinamic");
 	this.results = $("#results");
-	this.roundButton = $(".button");
+	this.roundButton = $("#menu > a");
 	this.retry = $("#retry");
 	this.retryMissed = $("#retryMissed");
-	this.fakeMissed = $("#fakeMissed");
 }
 
 function userInterface()
@@ -119,6 +118,11 @@ function userInterface()
 		this.references.wordHistoryList.html("");
 	}
 
+	this.showDinamic = function()
+	{
+		this.references.dinamic.slideDown(1000);
+	}
+
 	this.hideDinamic = function()
 	{
 		this.references.dinamic.slideUp(1000);
@@ -129,11 +133,6 @@ function userInterface()
 		this.references.results.slideDown(1000);
 	}
 
-	this.showDinamic = function()
-	{
-		this.references.dinamic.slideDown(1000);
-	}
-
 	this.hideResults = function()
 	{
 		this.references.results.slideUp(1000);
@@ -142,15 +141,9 @@ function userInterface()
 	this.checkMissedWords = function(answersLength)
 	{
 		if(answersLength > 0)
-		{
-			this.references.retryMissed.show();
-			this.references.fakeMissed.hide();
-		}
+			this.references.retryMissed.removeClass("disableRetryMissed");
 		else
-		{
-			this.references.retryMissed.hide();
-			this.references.fakeMissed.show();
-		}
+			this.references.retryMissed.addClass("disableRetryMissed");
 
 	}
 }
