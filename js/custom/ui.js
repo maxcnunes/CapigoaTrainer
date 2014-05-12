@@ -138,12 +138,15 @@ function userInterface()
 		this.references.results.slideUp(1000);
 	}
 
-	this.checkMissedWords = function(answersLength)
+	this.enableRetryMissed = function()
 	{
-		if(answersLength > 0)
-			this.references.retryMissed.removeClass("disableRetryMissed");
-		else
-			this.references.retryMissed.addClass("disableRetryMissed");
+		this.references.retryMissed.removeClass("disableRetryMissed");
+		this.references.retryMissed.removeAttr('href');
+	}
 
+	this.disableRetryMissed = function()
+	{
+		this.references.retryMissed.addClass("disableRetryMissed");
+		this.references.retryMissed.addAttr('href','#');
 	}
 }

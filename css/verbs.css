@@ -7,6 +7,15 @@ html {
 	font-family: "Helvetica";
 }
 
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:hover {
+	color: grey;
+}
+
 body {
 	min-width: 900px;
 	margin: 0px;
@@ -221,10 +230,6 @@ header {
 	cursor: not-allowed;
 }
 
-#retry:hover, #retryMissed:hover{
-	color: lightgrey;
-}
-
 #results a:first-child{
 	margin: 65px 0 10px 0;
 }
@@ -257,11 +262,6 @@ header {
 	padding: 2px 4px;
 	margin: 1px 4px 0 0;
 	border: solid 2px transparent;
-}
-
-#menu a:hover {
-	cursor: pointer;
-	color: lightgrey;
 }
 
 #menu a > div {

@@ -79,11 +79,7 @@ function Controls()
 			CTR.resetValues();
 		});
 
-		UI.references.retryMissed.click(function()
-		{
-			CTR.currentVector = CTR.wrongAnswers.slice(0);
-			CTR.resetValues();
-		});
+		this.attachOnclickRetryMissed();
 
 		UI.references.roundButton.click(function() {
 			if($(this).hasClass("active"))
@@ -249,9 +245,35 @@ function Controls()
 
 	this.showResults = function()
 	{
+		if(this.wrongAnswers.length > 0)
+		{
+			this.attachOnclickRetryMissed();
+			UI.enableRetryMissed();
+		}
+		else
+		{
+			this.detachOnclickRetryMissed();
+			UI.disableRetryMissed();			
+		}
+
 		UI.hideDinamic();
-		UI.checkMissedWords(this.wrongAnswers.length);
-		UI.showResults();
+	}
+
+	this.attachOnclickRetryMissed = function()
+	{
+		UI.references.retryMissed.click(function()
+		{
+			CTR.currentVector = CTR.wrongAnswers.slice(0);
+			CTR.resetValues();
+		});
+	}
+
+	this.detachOnclickRetryMissed = function()
+	{
+		UI.references.retryMissed.click(function(e)
+		{
+			$(this).remove()
+		});
 	}
 
 	this.resetDisplay = function()
