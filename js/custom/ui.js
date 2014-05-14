@@ -8,11 +8,14 @@ function References()
 	this.verbTense = $("#command");
 	this.userInput = $("#userInput input");
 	this.wordHistoryList = $("#wordWrapper");
-	this.dinamic = $("#dinamic");
+	this.dinamic = $("#inputArea");
 	this.results = $("#results");
 	this.roundButton = $("#menu > a");
 	this.retry = $("#retry");
 	this.retryMissed = $("#retryMissed");
+	this.replay = $("#replay");
+	this.hiddenPlayer = $("#hiddenPlayer");
+	this.meaning = $("#meaning");
 }
 
 function userInterface()
@@ -32,7 +35,7 @@ function userInterface()
 
 	this.IncrementScore = function(wordScore)
 	{
-		inc = wordScore[0] + wordScore[1];
+		inc = wordScore[0] + wordScore[1] + wordScore[2];
 		this.references.score.text(parseInt(this.references.score.text()) + inc);
 	}
 
@@ -48,10 +51,20 @@ function userInterface()
 
 	this.ChangeVerbTense = function(tense)
 	{
-		if(tense === "simple")
-			vTense = "Past Simple:";
-		else
-			vTense = "Past Participle:";
+		vTense = "";
+
+		switch(tense)
+		{
+			case Step.Infinitive:
+				vTense = "Infinitive:";
+				break;
+			case Step.Simple:
+				vTense = "Past Simple:";
+				break;
+			case Step.Participle:
+				vTense = "Past Participle:";
+				break;
+		}
 
 		this.references.verbTense.text(vTense);
 	}
@@ -78,26 +91,33 @@ function userInterface()
 	{
 		titleSimple = "";
 		titleParticiple = "";
+		titleInfinitive = "";
 
 		if(wordScore[0] == 1){
+			classInfinitive = ' class="correct"';
+		}
+		else{
+			classInfinitive = ' class="wrong"';
+			titleInfinitive = ' title="You typed: '+wordHistory[0]+'"';
+		}
+
+		if(wordScore[1] == 1){
 			classSimple = ' class="correct"';
 		}
 		else{
 			classSimple = ' class="wrong"';
-			titleSimple = ' title="'+wordHistory[0]+'"';
+			titleSimple = ' title="You typed: '+wordHistory[1]+'"';
 		}
 
-		if(wordScore[1] == 1){
+		if(wordScore[2] == 1){
 			classParticiple = ' class="correct"';
 		}
 		else{
 			classParticiple = ' class="wrong"';
-			titleParticiple = ' title="'+wordHistory[1]+'"';
+			titleParticiple = ' title="You typed: '+wordHistory[2]+'"';
 		}
 
-		
-
-		newTag = "<ul><li>"+verb.infinitive+"</li><li"+classSimple+titleSimple+">"+verb.simple+"</li><li"+classParticiple+titleParticiple+">"+verb.participle+"</li></ul>";
+		newTag = "<ul><li"+classInfinitive+titleInfinitive+">"+verb.infinitive+"</li><li"+classSimple+titleSimple+">"+verb.simple+"</li><li"+classParticiple+titleParticiple+">"+verb.participle+"</li></ul>";
 		this.references.wordHistoryList.prepend(newTag);
 	}
 
@@ -110,7 +130,7 @@ function userInterface()
 	this.resetScore = function(vectorSize)
 	{
 		this.references.score.text(0);
-		this.references.totalScore.text(vectorSize*2);
+		this.references.totalScore.text(vectorSize*3);
 	}
 
 	this.resetWordHistory = function()
@@ -147,6 +167,11 @@ function userInterface()
 	this.disableRetryMissed = function()
 	{
 		this.references.retryMissed.addClass("disableRetryMissed");
-		this.references.retryMissed.addAttr('href','#');
+		this.references.retryMissed.attr('href','#');
+	}
+
+	this.setMeaning = function(meaning)
+	{
+		this.references.meaning.attr("title",meaning);
 	}
 }

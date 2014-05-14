@@ -4,7 +4,7 @@ function Controls()
 	this.score = 0;
 	this.wordScore = [0,0];
 	this.wordCounter = 1;
-	this.wordHistory = [null,null];
+	this.wordHistory = [null,null,null];
 	this.currentVector = null;
 	this.currentRound = null;
 	this.wrongAnswers = null;
@@ -88,6 +88,10 @@ function Controls()
 		    $(this).addClass('active');
 		});
 
+		UI.references.replay.click(function() {
+			CTR.googleSpeech(CTR.word.infinitive);
+		})
+
 	}
 
 	this.createRoundsVectors = function()
@@ -95,10 +99,10 @@ function Controls()
 		this.round1 = new Round(0, 49);
 		this.round2 = new Round(50, 99);
 		this.round3 = new Round(100, 149);
-		this.round4 = new Round(150, 198);
+		this.round4 = new Round(150, 199);
 		this.round5 = new Round(0, 99);
-		this.round6 = new Round(100, 198);
-		this.round7 = new Round(0, 198);
+		this.round6 = new Round(100, 199);
+		this.round7 = new Round(0, 199);
 	}
 
 	this.userEnter = function()
@@ -107,22 +111,27 @@ function Controls()
 		{
 			if(UI.UserInputIsNotEmpty() == true)
 			{
+				oldStep = this.currentStep;
 				this.verifyWord();
 
-				if(this.currentStep == Step.Simple){
-					UI.ChangeVerbTense("participle");
-					this.currentStep = Step.Participle;
-				}
-				else{
-					UI.ChangeVerbTense("simple");
+				if(this.currentStep == Step.Infinitive)
 					this.currentStep = Step.Simple;
+				else if(this.currentStep == Step.Simple)
+					this.currentStep = Step.Participle;
+				else
+					this.currentStep = Step.Infinitive;
 					
+				UI.ChangeVerbTense(this.currentStep);
+
+				if(oldStep == Step.Participle)
+				{
 					this.setScore();
 					UI.AddVerbInVerbList(this.word,this.wordScore,this.wordHistory);
 					this.addWrongAnswer();
 
 					this.updateStatus();
 				}
+
 				UI.ClearUserInput();
 			}
 		}	
@@ -138,8 +147,8 @@ function Controls()
 	this.resetValues = function()
 	{
 		this.cleanWrongAnswers();
-		UI.ChangeVerbTense("simple");
-		this.currentStep = Step.Simple;
+		UI.ChangeVerbTense(Step.Infinitive);
+		this.currentStep = Step.Infinitive;
 		UI.resetWordCounter(this.currentVector.length);
 		UI.resetScore(this.currentVector.length);
 		this.wordCounter = 1;
@@ -159,12 +168,10 @@ function Controls()
 
 	this.addWrongAnswer = function()
 	{
-
-		if(this.wordScore[0] == 0 || this.wordScore[1] == 0)
+		if(this.wordScore[0] == 0 || this.wordScore[1] == 0 | this.wordScore[2] == 0)
 		{
 			this.wrongAnswers.push(this.word);
-		}
-			
+		}	
 	}
 
 	this.chooseRound = function(round)
@@ -175,7 +182,7 @@ function Controls()
 
 	this.setScore = function()
 	{
-		this.score += this.wordScore[0] + this.wordScore[1];
+		this.score += this.wordScore[0] + this.wordScore[1] + this.wordScore[2];
 		UI.IncrementScore(this.wordScore);
 	}
 
@@ -203,60 +210,75 @@ function Controls()
 
 	this.updateUI = function()
 	{
-		UI.ChangeCurrentWord(this.word.infinitive);
+		this.googleSpeech(this.word.infinitive);
+		UI.setMeaning(this.word.meaning);
 		UI.IncrementWord();
 	}
 	this.cleanWordScore = function()
 	{
 		this.wordScore[0] = 0;
 		this.wordScore[1] = 0;
+		this.wordScore[2] = 0;
 	}
 
 	this.verifyWord = function()
 	{
+		userInput = UI.getUserInput().trim();
 		switch(this.currentStep)
 		{
+			case Step.Infinitive:
+				this.verifyInfinitive(userInput);
+				break;
 			case Step.Simple:
-				this.verifySimple();
+				this.verifySimple(userInput);
 				break;
 			case Step.Participle:
-				this.verifyParticiple();
+				this.verifyParticiple(userInput);
 				break;
 		}
 	}
 
-	this.verifySimple = function()
+	this.verifyInfinitive = function(userInput)
 	{
-		this.wordHistory[0] = UI.getUserInput();
-		if(this.word.simple == this.wordHistory[0])
-		{
+		this.wordHistory[0] = userInput;
+		if(this.word.infinitive == userInput)
 			this.wordScore[0] = 1;
-		}
 	}
 
-	this.verifyParticiple = function()
+	this.verifySimple = function(userInput)
 	{
-		this.wordHistory[1] = UI.getUserInput();
-		if(this.word.participle == this.wordHistory[1])
-		{
+		this.wordHistory[1] = userInput;
+		if(this.word.simple == userInput)
 			this.wordScore[1] = 1;
-		}
+	}
+
+	this.verifyParticiple = function(userInput)
+	{
+		this.wordHistory[2] = userInput;
+		if(this.word.participle == userInput)
+			this.wordScore[2] = 1;
 	}
 
 	this.showResults = function()
 	{
 		if(this.wrongAnswers.length > 0)
-		{
-			this.attachOnclickRetryMissed();
-			UI.enableRetryMissed();
-		}
+			this.enableRetryMissed();
 		else
-		{
-			this.detachOnclickRetryMissed();
-			UI.disableRetryMissed();			
-		}
+			this.disableRetryMissed();
 
 		UI.hideDinamic();
+	}
+
+	this.enableRetryMissed = function()
+	{
+		this.attachOnclickRetryMissed();
+		UI.enableRetryMissed();
+	}
+
+	this.disableRetryMissed = function()
+	{
+		this.detachOnclickRetryMissed();
+		UI.disableRetryMissed();	
 	}
 
 	this.attachOnclickRetryMissed = function()
@@ -270,10 +292,7 @@ function Controls()
 
 	this.detachOnclickRetryMissed = function()
 	{
-		UI.references.retryMissed.click(function(e)
-		{
-			$(this).remove()
-		});
+		UI.references.retryMissed.unbind('click');
 	}
 
 	this.resetDisplay = function()
@@ -281,4 +300,14 @@ function Controls()
 		UI.showDinamic();
 		UI.hideResults();
 	}
+
+	this.googleSpeech = function(word)
+	{
+		soundString = "http://translate.google.co.uk/translate_tts?ie=UTF-8&tl=en&q=" + word;
+		this.playSound(soundString);
+	}
+
+	this.playSound = function(soundfile) {
+		UI.references.hiddenPlayer.html("<embed src='"+soundfile+"' type='audio/mpeg' hidden='true' autostart='true' loop='false' />");
+ 	}
 }

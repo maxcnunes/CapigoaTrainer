@@ -1,6 +1,7 @@
 var Step = {
-	Simple: 0,
-	Participle: 1
+	Infinitive: 0,
+	Simple: 1,
+	Participle: 2
 };
 
 var Round = {

@@ -28,6 +28,7 @@
 		<a target="_blank" href="https://github.com/gabrielsiedler/CapigoaTrainer">
 			<img src="images/github.png">
 		</a>
+		<span id="hiddenPlayer"></span>
 	</div>
 	<div id="content">
 		<div id="messages" class="blackBox">
@@ -38,19 +39,20 @@
 				<a href="#" id="retryMissed">Retry with words you missed</a>
 			</div>
 		</div>
-		<div id="dinamic" style="display: block;">
-			<div id="currentWord">slay</div>
-			<div class="downContent">
-				<div id="command">Past Simple:</div>
+		<div id="inputArea">
+			<a href="#"><img id="replay" src="images/play.png"/></a>
+			<a id="meaning" title="" href="#">Meaning?</a>
+			<div>
+				<div id="command"></div>
 				<div id="userInput">
-					<input>
+					<input></input>
 				</div>
 			</div>
 		</div>
-		<div class="dottedBox borderRadius">
-			<div class="dottedBorderCaption">Word History</div>
-			<div class="wordHistory">
-				<ul class="historyHeader">
+		<div class="historyBox">
+			<div>Word History</div>
+			<div>
+				<ul id="verbTenses">
 					<li>Infinitive</li>
 					<li>Past Simple</li>
 					<li>Past Participle</li>
