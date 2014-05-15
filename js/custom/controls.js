@@ -36,6 +36,11 @@ function Controls()
 				e.preventDefault();
 			else if(e.which == 13)
 				CTR.userEnter();
+			else if(e.which == 32)
+			{
+				e.preventDefault();
+				CTR.googleSpeech(CTR.word.infinitive);
+			}
 		});
 	}
 
