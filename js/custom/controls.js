@@ -271,6 +271,7 @@ function Controls()
 		else
 			this.disableRetryMissed();
 
+		UI.showResults();
 		UI.hideDinamic();
 	}
 
@@ -288,11 +289,13 @@ function Controls()
 
 	this.attachOnclickRetryMissed = function()
 	{
-		UI.references.retryMissed.click(function()
-		{
-			CTR.currentVector = CTR.wrongAnswers.slice(0);
-			CTR.resetValues();
-		});
+		UI.references.retryMissed.click(function() {CTR.attachOnClick()});
+	}
+
+	this.attachOnClick = function()
+	{
+		CTR.currentVector = CTR.wrongAnswers.slice(0);
+		CTR.resetValues();
 	}
 
 	this.detachOnclickRetryMissed = function()
@@ -308,7 +311,7 @@ function Controls()
 
 	this.googleSpeech = function(word)
 	{
-		soundString = "http://translate.google.co.uk/translate_tts?ie=UTF-8&tl=en&q=" + word;
+		soundString = "voices/" + word + ".mp3";
 		this.playSound(soundString);
 	}
 
