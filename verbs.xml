@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VerbList>
+  <Verb>
+    <Infinitive>ask</Infinitive>
+    <PastSimple>asked</PastSimple>
+    <PastParticiple>asked</PastParticiple>
+	<Meaning>Say something in order to obtain an answer or some information</Meaning>
+  </Verb>
+  <Verb>
+    <Infinitive>ask2</Infinitive>
+    <PastSimple>asked2</PastSimple>
+    <PastParticiple>asked2</PastParticiple>
+	<Meaning>2Say something in order to obtain an answer or some information</Meaning>
+  </Verb>
+</VerbList>
+

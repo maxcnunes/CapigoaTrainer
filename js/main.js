@@ -4,10 +4,16 @@ $(function(){
 		alert("Your browser is not fully compatible with this website yet. Please use google chrome.");
 	}
 
-	UI = new userInterface();
-		CTR = new Controls();
-		
-		CTR.startControls();
+
+	verbBucket = new Array();
+	loadVerbs(verbBucket);
 
 });
 
+
+function afterLoad()
+{
+	UI = new userInterface();
+	CTR = new Controls();
+	CTR.startControls();
+}

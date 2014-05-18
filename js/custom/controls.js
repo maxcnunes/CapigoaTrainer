@@ -39,7 +39,7 @@ function Controls()
 			else if(e.which == 32)
 			{
 				e.preventDefault();
-				CTR.googleSpeech(CTR.word.infinitive);
+				CTR.playVoice();
 			}
 		});
 	}
@@ -90,7 +90,7 @@ function Controls()
 		});
 
 		UI.references.replay.click(function() {
-			CTR.googleSpeech(CTR.word.infinitive);
+			CTR.playVoice();
 		})
 
 	}
@@ -211,7 +211,7 @@ function Controls()
 
 	this.updateUI = function()
 	{
-		this.googleSpeech(this.word.infinitive);
+		this.playVoice();
 		UI.setMeaning(this.word.meaning);
 		UI.IncrementWord();
 	}
@@ -304,13 +304,8 @@ function Controls()
 		UI.hideResults();
 	}
 
-	this.googleSpeech = function(word)
+	this.playVoice = function(word)
 	{
-		soundString = "voices/" + word + ".mp3";
-		this.playSound(soundString);
+		this.word.voice.play();
 	}
-
-	this.playSound = function(soundfile) {
-		UI.references.hiddenPlayer.html("<embed src='"+soundfile+"' type='audio/mpeg' hidden='true' autostart='true' loop='false' />");
- 	}
 }
