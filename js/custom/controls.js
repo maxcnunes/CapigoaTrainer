@@ -78,13 +78,9 @@ function Controls()
 			CTR.resetValues();
 		});
 
-		UI.references.retry.click(function()
-		{
-			CTR.chooseRound(CTR.currentRound);
-			CTR.resetValues();
+		UI.references.retryMissed.click(function() {
+			CTR.getVectorFromWrongAnswers();
 		});
-
-		this.attachOnclickRetryMissed();
 
 		UI.references.roundButton.click(function() {
 			if($(this).hasClass("active"))
@@ -266,6 +262,7 @@ function Controls()
 
 	this.showResults = function()
 	{
+		this.detachOnclickRetryMissed();
 		if(this.wrongAnswers.length > 0)
 			this.enableRetryMissed();
 		else
@@ -277,7 +274,10 @@ function Controls()
 
 	this.enableRetryMissed = function()
 	{
-		this.attachOnclickRetryMissed();
+		UI.references.retryMissed.click(function() {
+			CTR.getVectorFromWrongAnswers();
+		});
+
 		UI.enableRetryMissed();
 	}
 
@@ -287,20 +287,15 @@ function Controls()
 		UI.disableRetryMissed();	
 	}
 
-	this.attachOnclickRetryMissed = function()
-	{
-		UI.references.retryMissed.click(function() {CTR.attachOnClick()});
-	}
-
-	this.attachOnClick = function()
-	{
-		CTR.currentVector = CTR.wrongAnswers.slice(0);
-		CTR.resetValues();
-	}
-
 	this.detachOnclickRetryMissed = function()
 	{
 		UI.references.retryMissed.unbind('click');
+	}
+
+	this.getVectorFromWrongAnswers = function()
+	{
+		this.currentVector = this.wrongAnswers.slice(0);
+		this.resetValues();
 	}
 
 	this.resetDisplay = function()
