@@ -1,55 +1,32 @@
-function References()
+function UserInterface()
 {
-	this.word = $("#word");
-	this.totalWords = $("#totalWords");
-	this.score = $("#score");
-	this.totalScore = $("#totalScore");
-	this.currentWord = $("#currentWord");
-	this.verbTense = $("#command");
-	this.userInput = $("#userInput input");
-	this.wordHistoryList = $("#wordWrapper");
-	this.dinamic = $("#inputArea");
-	this.results = $("#results");
-	this.roundButton = $("#menu > a");
-	this.retry = $("#retry");
-	this.retryMissed = $("#retryMissed");
-	this.replay = $("#replay");
-	this.hiddenPlayer = $("#hiddenPlayer");
-	this.meaning = $("#meaning");
-}
-
-function userInterface()
-{
-	this.references = new References();
-
-	//Basic methods
-	this.IncrementWord = function()
+	this.clearWord = function()
 	{
-		this.references.word.text(parseInt(this.references.word.text()) + 1); 
+		References.word.text(1);
 	}
 
-	this.ClearWord = function()
+	this.incrementWord = function()
 	{
-		this.references.word.text(1);
+		References.word.text(parseInt(References.word.text()) + 1); 
 	}
 
-	this.IncrementScore = function(wordScore)
+	this.clearScore = function()
+	{
+		References.score.text(0);
+	}
+
+	this.incrementScore = function(wordScore)
 	{
 		inc = wordScore[0] + wordScore[1] + wordScore[2];
-		this.references.score.text(parseInt(this.references.score.text()) + inc);
+		References.score.text(parseInt(References.score.text()) + inc);
 	}
 
-	this.ClearScore = function()
+	this.changeCurrentWord = function(newWord)
 	{
-		this.references.score.text(0);
+		References.currentWord.text(newWord);
 	}
 
-	this.ChangeCurrentWord = function(newWord)
-	{
-		this.references.currentWord.text(newWord);
-	}
-
-	this.ChangeVerbTense = function(tense)
+	this.changeVerbTense = function(tense)
 	{
 		vTense = "";
 
@@ -66,20 +43,20 @@ function userInterface()
 				break;
 		}
 
-		this.references.verbTense.text(vTense);
+		References.verbTense.text(vTense);
+	}
+
+	this.clearUserInput = function()
+	{
+		References.userInput.val("");
 	}
 
 	this.getUserInput = function() 
 	{
-		return this.references.userInput.val();
+		return References.userInput.val();
 	}
 
-	this.ClearUserInput = function()
-	{
-		this.references.userInput.val("");
-	}
-
-	this.UserInputIsNotEmpty = function()
+	this.userInputIsNotEmpty = function()
 	{
 		if(this.getUserInput().length == 0)
 			return false;
@@ -87,7 +64,7 @@ function userInterface()
 		return true;
 	}
 
-	this.AddVerbInVerbList = function(verb,wordScore,wordHistory)
+	this.addVerbInVerbList = function(verb,wordScore,wordHistory)
 	{
 		titleSimple = "";
 		titleParticiple = "";
@@ -118,60 +95,70 @@ function userInterface()
 		}
 
 		newTag = "<ul><li"+classInfinitive+titleInfinitive+">"+verb.infinitive+"</li><li"+classSimple+titleSimple+">"+verb.simple+"</li><li"+classParticiple+titleParticiple+">"+verb.participle+"</li></ul>";
-		this.references.wordHistoryList.prepend(newTag);
+		References.wordHistoryList.prepend(newTag);
 	}
 
 	this.resetWordCounter = function(vectorSize)
 	{
-		this.references.word.text(0);
-		this.references.totalWords.text(vectorSize);
+		References.word.text(0);
+		References.totalWords.text(vectorSize);
 	}
 
 	this.resetScore = function(vectorSize)
 	{
-		this.references.score.text(0);
-		this.references.totalScore.text(vectorSize*3);
+		References.score.text(0);
+		References.totalScore.text(vectorSize*3);
 	}
 
 	this.resetWordHistory = function()
 	{
-		this.references.wordHistoryList.html("");
+		References.wordHistoryList.html("");
 	}
 
 	this.showDinamic = function()
 	{
-		this.references.dinamic.slideDown(1000);
+		References.dinamic.slideDown(1000);
 	}
 
 	this.hideDinamic = function()
 	{
-		this.references.dinamic.slideUp(1000);
+		References.dinamic.slideUp(1000);
 	}
 
 	this.showResults = function()
 	{
-		this.references.results.slideDown(1000);
+		References.results.slideDown(1000);
 	}
 
 	this.hideResults = function()
 	{
-		this.references.results.slideUp(1000);
+		References.results.slideUp(1000);
 	}
 
 	this.enableRetryMissed = function()
 	{
-		this.references.retryMissed.removeClass("disableRetryMissed");
-		this.references.retryMissed.removeAttr('href');
+		References.retryMissed.removeClass("disableRetryMissed");
+		References.retryMissed.removeAttr('href');
 	}
 
 	this.disableRetryMissed = function()
 	{
-		this.references.retryMissed.addClass("disableRetryMissed");
-		this.references.retryMissed.attr('href','#');
+		References.retryMissed.addClass("disableRetryMissed");
+		References.retryMissed.attr('href','#');
 	}
 
 	this.setMeaning = function(meaning)
 	{
-		this.references.meaning.attr("title",meaning);
+		References.meaning.attr("title",meaning);
+	}
+
+	this.showSubMenu = function()
+	{
+		References.subMenu.slideDown(500);
+	}
+
+	this.hideSubMenu = function()
+	{
+		References.subMenu.slideUp(500);
 	}
 }

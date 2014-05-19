@@ -1,19 +1,32 @@
+var Step = {
+	Infinitive: 0,
+	Simple: 1,
+	Participle: 2
+};
+
+var Round = {
+	One: 1,
+	Two: 2,
+	Three: 3,
+	Four: 4,
+	Five: 5,
+	Six: 6,
+	Seve: 7
+};
+
 $(function(){
-
-	if (!(navigator.userAgent.indexOf('Chrome') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Chrome') + 7).split(' ')[0]) >= 15)){
-		alert("Your browser is not fully compatible with this website yet. Please use google chrome.");
-	}
-
-
 	verbBucket = new Array();
 	loadVerbs(verbBucket);
-
 });
 
+References = null;
+webpageInterface = null;
+verbsControls = null;
 
 function afterLoad()
 {
-	UI = new userInterface();
-	CTR = new Controls();
-	CTR.startControls();
+	References = new ElementsReferences();
+	userInterface = new UserInterface();
+	controls = new Controls();
+	controls.startControls();
 }
