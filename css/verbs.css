@@ -14,7 +14,7 @@ a {
 }
 
 a:hover {
-	color: grey;
+	color: #89827E;
 }
 
 body {
@@ -233,32 +233,18 @@ header {
 	margin: 65px 0 10px 0;
 }
 
-
-
 #menu {
 	float: right;
 	margin-right: 40px;
+	margin-top: 20px;
  	height: 100%;
+ 	font-family: "Berlin Sans FB";
 }
 
-#menu a {
-	font-size: 16px;
-	text-align: center;
-	display: inline-block;
-	padding: 6px 12px 6px 50px;
-	margin: 10px 0px 0 0;
-	border: solid 2px transparent;
-}
-
-#menu a > div {
-	font-size: 10px;
-}
-
-#menu .active {
-	border: solid 2px lightgrey;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+#menu > a {
+	font-size: 30px;
+	margin-right: 20px;
+	padding-left: 20px;
 }
 
 #github {
@@ -277,29 +263,29 @@ header {
 	position: absolute;
 	width: 50px;
 	height: 31px;
-	background: url("../images/roundsprites.png") no-repeat;
+	background: url("../images/buttonsprites.png") no-repeat;
 	margin-left: -50px;
 }
 #r1 .roundIcon {
-	background-position: 0px 0px;
+	background-position: -5px 0px;
 }
 #r2 .roundIcon {
-	background-position: -50px 0px;
+	background-position: -60px 0px;
 }
 #r3 .roundIcon {
-	background-position: -100px 0px;
+	background-position: -110px 0px;
 }
 #r4 .roundIcon {
-	background-position: -150px 0px;
+	background-position: -160px 0px;
 }
 #r5 .roundIcon {
-	background-position: -200px 0px;
+	background-position: -210px 0px;
 }
 #r6 .roundIcon {
-	background-position: -250px 0px;
+	background-position: -260px 0px;
 }
 #r7 .roundIcon {
-	background-position: -300px 0px;
+	background-position: -310px 0px;
 }
 
 #gap{
@@ -307,6 +293,7 @@ header {
 }
 
 #submenu{
+	color: black;
 	height: 70px;
 	width: 100%;
 	position: absolute;
@@ -320,4 +307,49 @@ header {
 	-webkit-box-shadow: 0px 5px 12px 0px rgba(50, 50, 50, 0.63);
 	-moz-box-shadow:    0px 5px 12px 0px rgba(50, 50, 50, 0.63);
 	box-shadow:         0px 5px 12px 0px rgba(50, 50, 50, 0.63);
+}
+
+#submenu a {
+	color: black;
+}
+
+#submenu a:hover{
+	color: #89827E;
+}
+
+#submenu > div {
+	margin-right: 20px;
+}
+
+#rounds {
+	float: right;
+}
+
+#rounds a {
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+	padding: 6px 12px 6px 55px;
+	margin: 10px 15px 0 0;
+	border: solid 2px transparent;
+}
+
+#rounds a > div {
+	font-size: 10px;
+}
+
+#rounds .active {
+	border: solid 2px #89827E;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.disabled {
+	color: grey;
+}
+
+.disabled:hover{
+	color: grey;
+	cursor: not-allowed;
 }

@@ -10,11 +10,10 @@ function ElementsReferences()
 	this.wordHistoryList = $("#wordWrapper");
 	this.dinamic = $("#inputArea");
 	this.results = $("#results");
-	this.roundButton = $("#menu > a");
+	this.roundButton = $("#rounds > a");
 	this.retry = $("#retry");
 	this.retryMissed = $("#retryMissed");
 	this.replay = $("#replay");
-	this.hiddenPlayer = $("#hiddenPlayer");
 	this.meaning = $("#meaning");
 	this.subMenu = $("#subMenu");
 }
