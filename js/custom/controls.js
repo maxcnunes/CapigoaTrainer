@@ -20,77 +20,82 @@ function Controls()
 	
 	this.defineAutoFocus = function()
 	{
-		UI.references.userInput.focus();
+		References.userInput.focus();
 
-		UI.references.userInput.on('blur',function()
+		References.userInput.on('blur',function()
 		{
-			UI.references.userInput.focus();
+			References.userInput.focus();
 		});
 	}
 
 	this.defineOnEnter = function()
 	{
-		UI.references.userInput.keydown(function(e)
+		References.userInput.keydown(function(e)
 		{
 			if(e.which == 9)
 				e.preventDefault();
 			else if(e.which == 13)
-				CTR.userEnter();
+				controls.userEnter();
 			else if(e.which == 32)
 			{
 				e.preventDefault();
-				CTR.playVoice();
+				controls.playVoice();
 			}
 		});
 	}
 
 	this.defineOnClick = function()
 	{
-		UI.references.roundButton.click(function(e)
+		References.roundButton.click(function(e)
 		{
 			buttonID = e.target.id || e.target.parentNode.id;
 
 			switch(buttonID)
 			{
 				case 'r1':
-					CTR.chooseRound(CTR.round1);
+					controls.chooseRound(controls.round1);
 					break;
 				case 'r2':
-					CTR.chooseRound(CTR.round2);
+					controls.chooseRound(controls.round2);
 					break;
 				case 'r3':
-					CTR.chooseRound(CTR.round3);
+					controls.chooseRound(controls.round3);
 					break;
 				case 'r4':
-					CTR.chooseRound(CTR.round4);
+					controls.chooseRound(controls.round4);
 					break;
 				case 'r5':
-					CTR.chooseRound(CTR.round5);
+					controls.chooseRound(controls.round5);
 					break;
 				case 'r6':
-					CTR.chooseRound(CTR.round6);
+					controls.chooseRound(controls.round6);
 					break;
 				case 'r7':
-					CTR.chooseRound(CTR.round7);
+					controls.chooseRound(controls.round7);
 					break;
 			}
 
-			CTR.resetValues();
+			controls.resetValues();
 		});
 
-		UI.references.retryMissed.click(function() {
-			CTR.getVectorFromWrongAnswers();
+		References.retry.click(function() {
+			controls.chooseRound(controls.currentRound);
+			controls.resetValues();
 		});
 
-		UI.references.roundButton.click(function() {
+		References.retryMissed.click(function() {
+			controls.getVectorFromWrongAnswers();
+		});
+
+		References.roundButton.click(function() {
 			if($(this).hasClass("active"))
 				return;
-		    UI.references.roundButton.removeClass('active');
+		    References.roundButton.removeClass('active');
 		    $(this).addClass('active');
 		});
 
-		UI.references.replay.click(function() {
-			CTR.playVoice();
+		References.replay.click(function() {
+			controls.playVoice();
 		})
 
 	}
@@ -110,7 +115,7 @@ function Controls()
 	{
 		if(!this.roundFinished)
 		{
-			if(UI.UserInputIsNotEmpty() == true)
+			if(userInterface.userInputIsNotEmpty() == true)
 			{
 				oldStep = this.currentStep;
 				this.verifyWord();
@@ -122,18 +127,18 @@ function Controls()
 				else
 					this.currentStep = Step.Infinitive;
 					
-				UI.ChangeVerbTense(this.currentStep);
+				userInterface.changeVerbTense(this.currentStep);
 
 				if(oldStep == Step.Participle)
 				{
 					this.setScore();
-					UI.AddVerbInVerbList(this.word,this.wordScore,this.wordHistory);
+					userInterface.addVerbInVerbList(this.word,this.wordScore,this.wordHistory);
 					this.addWrongAnswer();
 
 					this.updateStatus();
 				}
 
-				UI.ClearUserInput();
+				userInterface.clearUserInput();
 			}
 		}	
 	}
@@ -148,15 +153,15 @@ function Controls()
 	this.resetValues = function()
 	{
 		this.cleanWrongAnswers();
-		UI.ChangeVerbTense(Step.Infinitive);
+		userInterface.changeVerbTense(Step.Infinitive);
 		this.currentStep = Step.Infinitive;
-		UI.resetWordCounter(this.currentVector.length);
-		UI.resetScore(this.currentVector.length);
+		userInterface.resetWordCounter(this.currentVector.length);
+		userInterface.resetScore(this.currentVector.length);
 		this.wordCounter = 1;
 		this.score = 0;
 		this.roundFinished = false;
 
-		UI.resetWordHistory();
+		userInterface.resetWordHistory();
 		this.updateStatus();
 		this.resetDisplay();
 	}
@@ -184,7 +189,7 @@ function Controls()
 	this.setScore = function()
 	{
 		this.score += this.wordScore[0] + this.wordScore[1] + this.wordScore[2];
-		UI.IncrementScore(this.wordScore);
+		userInterface.incrementScore(this.wordScore);
 	}
 
 	this.updateStatus = function()
@@ -212,8 +217,8 @@ function Controls()
 	this.updateUI = function()
 	{
 		this.playVoice();
-		UI.setMeaning(this.word.meaning);
-		UI.IncrementWord();
+		userInterface.setMeaning(this.word.meaning);
+		userInterface.incrementWord();
 	}
 	this.cleanWordScore = function()
 	{
@@ -224,7 +229,7 @@ function Controls()
 
 	this.verifyWord = function()
 	{
-		userInput = UI.getUserInput().trim();
+		userInput = userInterface.getUserInput().trim();
 		switch(this.currentStep)
 		{
 			case Step.Infinitive:
@@ -268,28 +273,28 @@ function Controls()
 		else
 			this.disableRetryMissed();
 
-		UI.showResults();
-		UI.hideDinamic();
+		userInterface.showResults();
+		userInterface.hideDinamic();
 	}
 
 	this.enableRetryMissed = function()
 	{
-		UI.references.retryMissed.click(function() {
-			CTR.getVectorFromWrongAnswers();
+		References.retryMissed.click(function() {
+			controls.getVectorFromWrongAnswers();
 		});
 
-		UI.enableRetryMissed();
+		userInterface.enableRetryMissed();
 	}
 
 	this.disableRetryMissed = function()
 	{
 		this.detachOnclickRetryMissed();
-		UI.disableRetryMissed();	
+		userInterface.disableRetryMissed();	
 	}
 
 	this.detachOnclickRetryMissed = function()
 	{
-		UI.references.retryMissed.unbind('click');
+		References.retryMissed.unbind('click');
 	}
 
 	this.getVectorFromWrongAnswers = function()
@@ -300,12 +305,54 @@ function Controls()
 
 	this.resetDisplay = function()
 	{
-		UI.showDinamic();
-		UI.hideResults();
+		userInterface.showDinamic();
+		userInterface.hideResults();
 	}
 
 	this.playVoice = function(word)
 	{
 		this.word.voice.play();
 	}
+}
+
+
+function Verb(infinitive, simple, participle, meaning)
+{
+	this.infinitive = infinitive;
+	this.simple = simple;
+	this.participle = participle;
+	this.meaning = meaning;
+	this.voice = new Audio("voices/"+infinitive+".mp3");
+}
+
+function Round(min, max)
+{
+	this.roundVector = new Array();
+
+	//max+1 because slice doesn't get the last index
+	this.roundVector = verbBucket.slice(min, max+1);
+}
+
+function loadVerbs(verbBucket)
+{
+	$.ajax({
+	    type: "GET",
+	    url: "verbs.xml",
+	    dataType: "xml",
+	    success: function(xml){
+	        $(xml).find('Verb').each(function(){
+		        var infinitive = $(this).find('Infinitive').text();
+		        var pastSimple = $(this).find('PastSimple').text();
+		        var pastParticiple = $(this).find('PastParticiple').text();
+		        var meaning = $(this).find('Meaning').text();
+		        var newVerb = new Verb(infinitive,pastSimple,pastParticiple,meaning);
+		        verbBucket.push(newVerb);
+	    	});
+
+	    	afterLoad();
+	    },
+	    error: function() {
+	    	alert("An error occurred while processing XML file.");
+	    }
+	});
 }
