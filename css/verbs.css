@@ -293,6 +293,8 @@ header {
 }
 
 #submenu{
+	display: none;
+
 	color: black;
 	height: 70px;
 	width: 100%;
@@ -321,19 +323,6 @@ header {
 	margin-right: 20px;
 }
 
-#rounds {
-	float: right;
-}
-
-#rounds a {
-	font-size: 16px;
-	text-align: center;
-	display: inline-block;
-	padding: 6px 12px 6px 55px;
-	margin: 10px 15px 0 0;
-	border: solid 2px transparent;
-}
-
 #rounds a > div {
 	font-size: 10px;
 }
@@ -346,10 +335,33 @@ header {
 }
 
 .disabled {
-	color: grey;
+	color: #89827E;
 }
 
 .disabled:hover{
-	color: grey;
+	color: #89827E;
 	cursor: not-allowed;
+}
+
+#rounds {
+	display: visible;
+	float: right;
+}
+
+#rounds a {
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+	padding: 6px 12px 6px 55px;
+	margin: 10px 15px 0 0;
+	border: solid 2px transparent;
+}
+
+#abouts {
+	display: none;
+}
+
+.menuIcon {
+	width: 50px;
+	height: 55px;
 }

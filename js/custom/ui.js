@@ -154,11 +154,16 @@ function UserInterface()
 
 	this.showSubMenu = function()
 	{
-		References.subMenu.slideDown(500);
+		References.subMenu.slideDown(200);
 	}
 
 	this.hideSubMenu = function()
 	{
-		References.subMenu.slideUp(500);
+		References.subMenu.slideUp(200);
+	}
+
+	this.hideSubMenuFast = function()
+	{
+		References.subMenu.slideUp(100);
 	}
 }

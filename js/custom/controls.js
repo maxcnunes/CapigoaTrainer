@@ -8,6 +8,7 @@ function Controls()
 	this.currentVector = null;
 	this.currentRound = null;
 	this.wrongAnswers = null;
+	this.currentTab = Tabs.None;
 
 	this.startControls = function()
 	{
@@ -96,8 +97,43 @@ function Controls()
 
 		References.replay.click(function() {
 			controls.playVoice();
-		})
+		});
 
+		References.round.click(function() {
+			if(this.currentTab == Tabs.Round)
+			{
+				userInterface.hideSubMenu();
+				this.currentTab = Tabs.None;
+			}
+			else
+			{
+				if(References.subMenu.is(":visible"))
+					userInterface.hideSubMenuFast();
+
+				userInterface.showSubMenu();
+
+				this.currentTab = Tabs.Round;
+			}
+			
+		});
+
+		References.about.click(function() {
+			if(this.currentTab == Tabs.About)
+			{
+				userInterface.hideSubMenu();
+				this.currentTab = Tabs.None;
+			}
+			else
+			{
+				if(References.subMenu.is(":visible"))
+					userInterface.hideSubMenuFast();
+
+				userInterface.showSubMenu();
+
+				this.currentTab = Tabs.About;
+			}
+			
+		});
 	}
 
 	this.createRoundsVectors = function()

@@ -16,4 +16,11 @@ function ElementsReferences()
 	this.replay = $("#replay");
 	this.meaning = $("#meaning");
 	this.subMenu = $("#subMenu");
+
+	this.verbList = $("#verbList");
+	this.round = $("#round");
+	this.about = $("#about");
+
+	this.subMenuRounds = $("#rounds");
+	this.subMenuAbout = $("#abouts");
 }

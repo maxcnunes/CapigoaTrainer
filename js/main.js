@@ -14,6 +14,12 @@ var Round = {
 	Seve: 7
 };
 
+var Tabs = {
+	None: 0,
+	About: 1,
+	Round: 2
+}
+
 $(function(){
 	verbBucket = new Array();
 	loadVerbs(verbBucket);
