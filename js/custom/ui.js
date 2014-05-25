@@ -152,9 +152,23 @@ function UserInterface()
 		References.meaning.attr("title",meaning);
 	}
 
-	this.showSubMenu = function()
+	this.showSubMenu = function(id)
 	{
 		References.subMenu.slideDown(200);
+	}
+
+	this.showAbout = function()
+	{
+		References.subMenuRounds.hide();
+		References.subMenuAbout.show(200);
+		References.subMenu.slideDown(300);
+	}
+
+	this.showRound = function()
+	{
+		References.subMenuAbout.hide();
+		References.subMenuRounds.show(200);
+		References.subMenu.slideDown(300);
 	}
 
 	this.hideSubMenu = function()
@@ -162,7 +176,7 @@ function UserInterface()
 		References.subMenu.slideUp(200);
 	}
 
-	this.hideSubMenuFast = function()
+	this.quickHideSubMenu = function()
 	{
 		References.subMenu.slideUp(100);
 	}

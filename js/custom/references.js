@@ -23,4 +23,6 @@ function ElementsReferences()
 
 	this.subMenuRounds = $("#rounds");
 	this.subMenuAbout = $("#abouts");
+
+	this.blackLayer = $("#blackLayer");
 }

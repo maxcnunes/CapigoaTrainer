@@ -100,39 +100,47 @@ function Controls()
 		});
 
 		References.round.click(function() {
-			if(this.currentTab == Tabs.Round)
+			if(controls.currentTab == Tabs.Round)
 			{
 				userInterface.hideSubMenu();
-				this.currentTab = Tabs.None;
+				controls.currentTab = Tabs.None;
 			}
 			else
 			{
 				if(References.subMenu.is(":visible"))
-					userInterface.hideSubMenuFast();
+					userInterface.quickHideSubMenu();
 
-				userInterface.showSubMenu();
+				userInterface.showRound();
 
-				this.currentTab = Tabs.Round;
+				controls.currentTab = Tabs.Round;
 			}
 			
 		});
 
 		References.about.click(function() {
-			if(this.currentTab == Tabs.About)
+			if(controls.currentTab == Tabs.About)
 			{
 				userInterface.hideSubMenu();
-				this.currentTab = Tabs.None;
+				controls.currentTab = Tabs.None;
 			}
 			else
 			{
 				if(References.subMenu.is(":visible"))
-					userInterface.hideSubMenuFast();
+					userInterface.quickHideSubMenu();
 
-				userInterface.showSubMenu();
+				userInterface.showAbout();
 
-				this.currentTab = Tabs.About;
+				controls.currentTab = Tabs.About;
 			}
 			
+		});
+
+		References.verbList.click(function() {
+			References.blackLayer.show();			
+		});
+
+		References.blackLayer.click(function() {
+			References.blackLayer.hide();
 		});
 	}
 
