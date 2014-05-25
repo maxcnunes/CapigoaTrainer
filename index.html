@@ -13,10 +13,10 @@
 	<header class="blackBox">
 		<img src="images/logo.png" id="logo"/>
 		<div id="menu">
-			<a href="#" id="verbList"><span class="menuIcon"></span>Verb List</a>
-			<a href="#" id="round"><span class="menuIcon">Round</a>
-			<a href="#" id="about"><span class="menuIcon">About</a>
-			<a href="https://github.com/gabrielsiedler/CapigoaTrainer" target="_blank"><span class="menuIcon">Github</a>
+			<a href="#" id="verbList" title="Available soon" class="disabled"><span class="menuIcon"></span>Verb List</a>
+			<a href="#" id="round"><span class="menuIcon"></span>Round</a>
+			<a href="#" id="about"><span class="menuIcon"></span>About</a>
+			<a href="https://github.com/gabrielsiedler/CapigoaTrainer" id="github" target="_blank"><span class="menuIcon"></span>Github</a>
 		</div>
 	</header>
 	<div id="gap">
@@ -46,8 +46,10 @@
 			</div>
 		</div>
 		<div id="inputArea">
-			<a href="#"><img id="replay" src="images/play.png"/></a>
-			<a id="meaning" title="" href="#">Meaning?</a>
+			<div id="inputButtons">
+				<a href="#" id="replay" class="blackBox"><img src="images/play.png"/></a>
+				<a id="meaning" title="" class="whiteBox" href="#">?</a>
+			</div>
 			<div>
 				<div id="command"></div>
 				<div id="userInput">
@@ -67,17 +69,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="blackLayer">
-	</div>
-	<div id="verbListLayer">
-		<div id="verbListArea">
-			This is the verb list
-			This is the verb list
-			This is the verb list
-			This is the verb list
-		</div>
-	</div>
 	<footer>
+		<div id="information" class="whiteBox">
+			<div>
+			</div>
+		</div>
 	</footer>
 
 </body></html>

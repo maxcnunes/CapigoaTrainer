@@ -15,6 +15,7 @@ function Controls()
 		this.defineAutoFocus();
 		this.defineOnEnter();
 		this.defineOnClick();
+		this.defineOnOver();
 		this.createRoundsVectors();
 		this.setInitialValues();
 	}
@@ -100,48 +101,54 @@ function Controls()
 		});
 
 		References.round.click(function() {
-			if(controls.currentTab == Tabs.Round)
+			if(this.currentTab == Tabs.Round)
 			{
 				userInterface.hideSubMenu();
-				controls.currentTab = Tabs.None;
+				this.currentTab = Tabs.None;
+				
 			}
 			else
 			{
 				if(References.subMenu.is(":visible"))
-					userInterface.quickHideSubMenu();
+					userInterface.hideSubMenuFast();
 
-				userInterface.showRound();
+				userInterface.showSubMenu();
 
-				controls.currentTab = Tabs.Round;
+				this.currentTab = Tabs.Round;
 			}
 			
 		});
 
 		References.about.click(function() {
-			if(controls.currentTab == Tabs.About)
+			if(this.currentTab == Tabs.About)
 			{
 				userInterface.hideSubMenu();
-				controls.currentTab = Tabs.None;
+				this.currentTab = Tabs.None;
 			}
 			else
 			{
 				if(References.subMenu.is(":visible"))
-					userInterface.quickHideSubMenu();
+					userInterface.hideSubMenuFast();
 
-				userInterface.showAbout();
+				userInterface.showSubMenu();
 
-				controls.currentTab = Tabs.About;
+				this.currentTab = Tabs.About;
 			}
 			
 		});
+	}
 
-		References.verbList.click(function() {
-			References.blackLayer.show();			
-		});
+	this.defineOnOver = function()
+	{
+		References.meaning.on("mouseenter",function(e)
+		{
+			userInterface.showMeaning(controls.word.meaning, e.pageX, e.pageY);
+		})
 
-		References.blackLayer.click(function() {
-			References.blackLayer.hide();
-		});
+		References.meaning.on("mouseleave",function(e)
+		{
+			userInterface.hideInformation();
+		})
 	}
 
 	this.createRoundsVectors = function()
@@ -261,7 +268,7 @@ function Controls()
 	this.updateUI = function()
 	{
 		this.playVoice();
-		userInterface.setMeaning(this.word.meaning);
+		userInterface.resetMeaning();
 		userInterface.incrementWord();
 	}
 	this.cleanWordScore = function()
@@ -388,7 +395,10 @@ function loadVerbs(verbBucket)
 		        var infinitive = $(this).find('Infinitive').text();
 		        var pastSimple = $(this).find('PastSimple').text();
 		        var pastParticiple = $(this).find('PastParticiple').text();
-		        var meaning = $(this).find('Meaning').text();
+		        var meaning = new Array();
+		        $(this).find('Meaning').each(function(){
+		        	meaning.push($(this).text());
+		        })
 		        var newVerb = new Verb(infinitive,pastSimple,pastParticiple,meaning);
 		        verbBucket.push(newVerb);
 	    	});

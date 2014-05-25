@@ -1,5 +1,7 @@
 function UserInterface()
 {
+	this.meaning = null;
+
 	this.clearWord = function()
 	{
 		References.word.text(1);
@@ -147,28 +149,9 @@ function UserInterface()
 		References.retryMissed.attr('href','#');
 	}
 
-	this.setMeaning = function(meaning)
-	{
-		References.meaning.attr("title",meaning);
-	}
-
-	this.showSubMenu = function(id)
+	this.showSubMenu = function()
 	{
 		References.subMenu.slideDown(200);
-	}
-
-	this.showAbout = function()
-	{
-		References.subMenuRounds.hide();
-		References.subMenuAbout.show(200);
-		References.subMenu.slideDown(300);
-	}
-
-	this.showRound = function()
-	{
-		References.subMenuAbout.hide();
-		References.subMenuRounds.show(200);
-		References.subMenu.slideDown(300);
 	}
 
 	this.hideSubMenu = function()
@@ -176,8 +159,45 @@ function UserInterface()
 		References.subMenu.slideUp(200);
 	}
 
-	this.quickHideSubMenu = function()
+	this.hideSubMenuFast = function()
 	{
 		References.subMenu.slideUp(100);
+	}
+
+	this.showMeaning = function(content,x,y)
+	{
+		if(this.meaning == null)
+			this.meaning = this.buildMeaning(content);
+
+		this.showInformation(this.meaning,x,y);
+	}
+
+	this.showInformation = function(content,x,y)
+	{
+		References.information.css('left',(x+10));
+		References.information.css('top',(y+10));
+		References.informationText.html(content);
+		References.information.fadeIn(200);		
+	}
+
+	this.hideInformation = function()
+	{
+		References.information.fadeOut(200);
+	}
+
+	this.buildMeaning = function(meaningList)
+	{
+		var ulTag = '<ul>';
+		for (meaning in meaningList)
+			ulTag += '<li>'+meaningList[meaning]+'</li>';
+
+		ulTag += '</ul>';
+
+		return ulTag;
+	}
+
+	this.resetMeaning = function()
+	{
+		this.meaning = null;
 	}
 }

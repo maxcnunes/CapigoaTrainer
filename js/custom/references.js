@@ -24,5 +24,8 @@ function ElementsReferences()
 	this.subMenuRounds = $("#rounds");
 	this.subMenuAbout = $("#abouts");
 
-	this.blackLayer = $("#blackLayer");
+	this.information = $("#information");
+	this.informationText = $("#information > div");
+
+	this.loading = $("#loading");
 }
