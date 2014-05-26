@@ -56,24 +56,31 @@ function Controls()
 			{
 				case 'r1':
 					controls.chooseRound(controls.round1);
+					userInterface.changeRoundInMenu(Rounds.One);
 					break;
 				case 'r2':
 					controls.chooseRound(controls.round2);
+					userInterface.changeRoundInMenu(Rounds.Two);
 					break;
 				case 'r3':
 					controls.chooseRound(controls.round3);
+					userInterface.changeRoundInMenu(Rounds.Three);
 					break;
 				case 'r4':
 					controls.chooseRound(controls.round4);
+					userInterface.changeRoundInMenu(Rounds.Four);
 					break;
 				case 'r5':
 					controls.chooseRound(controls.round5);
+					userInterface.changeRoundInMenu(Rounds.Five);
 					break;
 				case 'r6':
 					controls.chooseRound(controls.round6);
+					userInterface.changeRoundInMenu(Rounds.Six);
 					break;
 				case 'r7':
 					controls.chooseRound(controls.round7);
+					userInterface.changeRoundInMenu(Rounds.Seven);
 					break;
 			}
 

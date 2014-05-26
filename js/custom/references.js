@@ -19,6 +19,7 @@ function ElementsReferences()
 
 	this.verbList = $("#verbList");
 	this.round = $("#round");
+	this.roundIcon = $("#round > span");
 	this.about = $("#about");
 
 	this.subMenuRounds = $("#rounds");

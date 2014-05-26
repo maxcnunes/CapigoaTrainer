@@ -247,8 +247,8 @@ header {
 
 #menu {
 	float: right;
-	margin-right: 40px;
-	margin-top: 10px;
+.	margin-right: 40px;
+	margin-top: 18px;
  	height: 100%;
  	font-family: "Berlin Sans FB";
 }
@@ -257,6 +257,70 @@ header {
 	font-size: 30px;
 	margin-right: 20px;
 	padding-left: 50px;
+}
+
+#menu div {
+	display: inline;
+	margin-left: 5px;
+	text-shadow: 0px 0px 5px rgba(200, 190, 183, 0.8);
+}
+
+#menu > a:hover {
+	color: white;
+	opacity: 0.7;
+}
+
+.menuIcon {
+	position: absolute;
+	width: 37px;
+	height: 40px;
+	margin-top: -2px;
+	background: url("../images/menuicons.png") no-repeat;
+	margin-left: -40px;
+}
+
+#verbList span{
+	background-position: -73px 0px;
+}
+
+#about span {
+	background-position: 0px 0px;
+}
+
+#github span{
+	background-position: -37px 0px;
+}
+
+#round span {
+	background: url("../images/buttonsprites.png") no-repeat;
+}
+
+#round .r1 {
+	background-position: -10px -31px;
+}
+
+#round .r2 {
+	background-position: -64px -31px;
+}
+
+#round .r3 {
+	background-position: -113px -31px;
+}
+
+#round .r4 {
+	background-position: -161px -31px;
+}
+
+#round .r5 {
+	background-position: -210px -31px;
+}
+
+#round .r6 {
+	background-position: -260px -31px;
+}
+
+#round .r7 {
+	background-position: -310px -31px;
 }
 
 #github {
@@ -447,33 +511,4 @@ header {
 
 #information li:not(:first-child) {
 	margin-top: 10px;
-}
-
-.menuIcon {
-	position: absolute;
-	width: 37px;
-	height: 40px;
-	background: url("../images/menuicons.png") no-repeat;
-	margin-left: -40px;
-}
-
-#verbList span{
-	background-position: -100px 0px;
-}
-
-#verbList span{
-	background-position: -73px 0px;
-}
-
-#round span {
-	background-position: -109px 0px;
-}
-
-#about span {
-	background-position: 0px 0px;
-}
-
-
-#github span{
-	background-position: -37px 0px;
 }

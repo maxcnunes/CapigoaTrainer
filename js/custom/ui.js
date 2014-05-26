@@ -55,7 +55,7 @@ function UserInterface()
 
 	this.getUserInput = function() 
 	{
-		return References.userInput.val();
+		return References.userInput.val().toLowerCase();
 	}
 
 	this.userInputIsNotEmpty = function()
@@ -199,5 +199,35 @@ function UserInterface()
 	this.resetMeaning = function()
 	{
 		this.meaning = null;
+	}
+
+	this.changeRoundInMenu = function(round)
+	{
+		References.roundIcon.removeClass("r1 r2 r3 r4 r5 r6 r7");
+		
+		switch(round)
+		{
+			case Rounds.One:
+				References.roundIcon.addClass('r1');
+				break;
+			case Rounds.Two:
+				References.roundIcon.addClass('r2');
+				break;
+			case Rounds.Three:
+				References.roundIcon.addClass('r3');
+				break;
+			case Rounds.Four:
+				References.roundIcon.addClass('r4');
+				break;
+			case Rounds.Five:
+				References.roundIcon.addClass('r5');
+				break;
+			case Rounds.Six:
+				References.roundIcon.addClass('r6');
+				break;
+			case Rounds.Seven:
+				References.roundIcon.addClass('r7');
+				break;
+		}
 	}
 }
