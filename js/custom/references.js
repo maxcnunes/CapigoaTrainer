@@ -28,4 +28,6 @@ function ElementsReferences()
 	this.informationText = $("#information > div");
 
 	this.loading = $("#loading");
+
+	this.blackLayer = $("#blackLayer");
 }
