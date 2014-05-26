@@ -381,14 +381,16 @@ header {
 
 #submenu a {
 	color: black;
+	text-align: center;
 }
 
 #submenu a:hover{
 	color: #89827E;
 }
 
-#submenu > div {
-	margin-right: 20px;
+#rounds {
+	width: 950px;
+	margin: 0px auto;
 }
 
 #rounds a > div {
@@ -402,18 +404,15 @@ header {
 	border-radius: 10px;
 }
 
-.disabled {
+.disabled * {
 	color: #89827E;
+	text-shadow: none !important;
 }
 
 .disabled:hover{
 	color: #89827E;
 	cursor: not-allowed;
-}
-
-#rounds {
-	display: visible;
-	float: right;
+	opacity: 1 !important;
 }
 
 #rounds a {
@@ -423,10 +422,6 @@ header {
 	padding: 6px 12px 6px 55px;
 	margin: 10px 15px 0 0;
 	border: solid 2px transparent;
-}
-
-#abouts {
-	display: none;
 }
 
 #replay {
@@ -511,4 +506,60 @@ header {
 
 #information li:not(:first-child) {
 	margin-top: 10px;
+}
+
+#blackLayer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.9);
+	display: none;
+}
+
+#verbListLayer {
+	display: block;
+	width: 800px;
+	height:800px;
+	background: rgba(255, 0, 0, 0.9);
+	display: none;
+}
+
+#verbListArea {
+	margin: 30px auto;
+	width: 800px;
+	background: white;
+	display: none;
+}
+
+footer img {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
+#abouts img {
+	display: inline;
+	height: 60px;
+	margin-top: 5px;
+	margin-right: 20px;
+}
+
+#abouts img:hover {
+	opacity: 0.8;
+}
+
+#abouts > div {
+	width: 750px;
+	margin: 0 auto;
+}
+
+#description {
+	display: inline-block;
+	width: 400px;
+
+	font-family: "Berlin Sans FB";
+	text-align: center;
+	font-size: 18px;
 }

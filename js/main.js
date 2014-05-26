@@ -17,7 +17,8 @@ var Rounds = {
 var Tabs = {
 	None: 0,
 	About: 1,
-	Round: 2
+	Round: 2,
+	VerbsList: 3
 }
 
 $(function(){
