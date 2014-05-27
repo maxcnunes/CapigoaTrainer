@@ -43,6 +43,21 @@ function Controls()
 				e.preventDefault();
 				controls.playVoice();
 			}
+			else if(e.which == 17 || e.which == 18)
+			{
+				e.preventDefault();
+				userInterface.showMeaning(controls.word.meaning, References.meaning.position().left, References.meaning.position().top);
+			}
+		});
+
+		References.userInput.keyup(function(e)
+		{
+			if(e.which == 17 || e.which == 18)
+			{
+				e.preventDefault();
+				userInterface.hideInformation();
+			}
+
 		});
 	}
 
@@ -83,6 +98,9 @@ function Controls()
 					userInterface.changeRoundInMenu(Rounds.Seven);
 					break;
 			}
+
+			controls.currentTab = Tabs.None;
+			userInterface.hideSubMenu();
 
 			controls.resetValues();
 		});

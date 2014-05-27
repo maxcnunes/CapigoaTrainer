@@ -247,10 +247,10 @@ header {
 
 #menu {
 	float: right;
-.	margin-right: 40px;
-	margin-top: 18px;
+	margin-right: 40px;
+	margin-top: 20px;
  	height: 100%;
- 	font-family: "Berlin Sans FB";
+ 	font-family: Berlin Sans FB;
 }
 
 #menu > a {
@@ -274,7 +274,7 @@ header {
 	position: absolute;
 	width: 37px;
 	height: 40px;
-	margin-top: -2px;
+	margin-top: -3px;
 	background: url("../images/menuicons.png") no-repeat;
 	margin-left: -40px;
 }
@@ -389,7 +389,7 @@ header {
 }
 
 #rounds {
-	width: 950px;
+	width: 980px;
 	margin: 0px auto;
 }
 
@@ -559,7 +559,6 @@ footer img {
 	display: inline-block;
 	width: 400px;
 
-	font-family: "Berlin Sans FB";
 	text-align: center;
 	font-size: 18px;
 }
