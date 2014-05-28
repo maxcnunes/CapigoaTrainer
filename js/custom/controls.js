@@ -2,101 +2,186 @@ function Controls()
 {
 	this.word = null;
 	this.score = 0;
-	this.wordScore = [0,0];
+	this.wordScore = [0,0,0];
 	this.wordCounter = 1;
+	this.currentWordCounter = 0;
 	this.wordHistory = [null,null,null];
 	this.currentVector = null;
 	this.currentRound = null;
 	this.wrongAnswers = null;
+	this.currentTab = Tabs.None;
 
 	this.startControls = function()
 	{
 		this.defineAutoFocus();
 		this.defineOnEnter();
 		this.defineOnClick();
+		this.defineOnOver();
 		this.createRoundsVectors();
 		this.setInitialValues();
 	}
 	
 	this.defineAutoFocus = function()
 	{
-		UI.references.userInput.focus();
+		References.userInput.focus();
 
-		UI.references.userInput.on('blur',function()
+		References.userInput.on('blur',function()
 		{
-			UI.references.userInput.focus();
+			References.userInput.focus();
 		});
 	}
 
 	this.defineOnEnter = function()
 	{
-		UI.references.userInput.keydown(function(e)
+		References.userInput.keydown(function(e)
 		{
 			if(e.which == 9)
 				e.preventDefault();
 			else if(e.which == 13)
-				CTR.userEnter();
+				controls.userEnter();
 			else if(e.which == 32)
 			{
 				e.preventDefault();
-				CTR.googleSpeech(CTR.word.infinitive);
+				controls.playVoice();
 			}
+			else if(e.which == 17 || e.which == 18)
+			{
+				e.preventDefault();
+				userInterface.showMeaning(controls.word.meaning, References.meaning.position().left, References.meaning.position().top);
+			}
+		});
+
+		References.userInput.keyup(function(e)
+		{
+			if(e.which == 17 || e.which == 18)
+			{
+				e.preventDefault();
+				userInterface.hideInformation();
+			}
+
 		});
 	}
 
 	this.defineOnClick = function()
 	{
-		UI.references.roundButton.click(function(e)
+		References.roundButton.click(function(e)
 		{
 			buttonID = e.target.id || e.target.parentNode.id;
 
 			switch(buttonID)
 			{
 				case 'r1':
-					CTR.chooseRound(CTR.round1);
+					controls.chooseRound(controls.round1);
+					userInterface.changeRoundInMenu(Rounds.One);
 					break;
 				case 'r2':
-					CTR.chooseRound(CTR.round2);
+					controls.chooseRound(controls.round2);
+					userInterface.changeRoundInMenu(Rounds.Two);
 					break;
 				case 'r3':
-					CTR.chooseRound(CTR.round3);
+					controls.chooseRound(controls.round3);
+					userInterface.changeRoundInMenu(Rounds.Three);
 					break;
 				case 'r4':
-					CTR.chooseRound(CTR.round4);
+					controls.chooseRound(controls.round4);
+					userInterface.changeRoundInMenu(Rounds.Four);
 					break;
 				case 'r5':
-					CTR.chooseRound(CTR.round5);
+					controls.chooseRound(controls.round5);
+					userInterface.changeRoundInMenu(Rounds.Five);
 					break;
 				case 'r6':
-					CTR.chooseRound(CTR.round6);
+					controls.chooseRound(controls.round6);
+					userInterface.changeRoundInMenu(Rounds.Six);
 					break;
 				case 'r7':
-					CTR.chooseRound(CTR.round7);
+					controls.chooseRound(controls.round7);
+					userInterface.changeRoundInMenu(Rounds.Seven);
 					break;
 			}
 
-			CTR.resetValues();
+			controls.currentTab = Tabs.None;
+			userInterface.hideSubMenu();
+
+			controls.resetValues();
 		});
 
-		UI.references.retry.click(function()
-		{
-			CTR.chooseRound(CTR.currentRound);
-			CTR.resetValues();
+		References.retry.click(function() {
+			controls.chooseRound(controls.currentRound);
+			controls.resetValues();
 		});
 
-		this.attachOnclickRetryMissed();
+		References.retryMissed.click(function() {
+			controls.getVectorFromWrongAnswers();
+		});
 
-		UI.references.roundButton.click(function() {
+		References.roundButton.click(function() {
 			if($(this).hasClass("active"))
 				return;
-		    UI.references.roundButton.removeClass('active');
+		    References.roundButton.removeClass('active');
 		    $(this).addClass('active');
 		});
 
-		UI.references.replay.click(function() {
-			CTR.googleSpeech(CTR.word.infinitive);
+		References.replay.click(function() {
+			controls.playVoice();
+		});
+
+		References.round.click(function() {
+			if(controls.currentTab == Tabs.Round)
+			{
+				userInterface.hideSubMenu();
+				controls.currentTab = Tabs.None;
+			}
+			else
+			{
+				if(References.subMenu.is(":visible"))
+					userInterface.quickHideSubMenu();
+
+				userInterface.showRound();
+
+				controls.currentTab = Tabs.Round;
+			}
+			
+		});
+
+		References.about.click(function() {
+			if(controls.currentTab == Tabs.About)
+			{
+				userInterface.hideSubMenu();
+				controls.currentTab = Tabs.None;
+			}
+			else
+			{
+				if(References.subMenu.is(":visible"))
+					userInterface.quickHideSubMenu();
+
+				userInterface.showAbout();
+
+				controls.currentTab = Tabs.About;
+			}
+			
+		});
+
+		// References.verbList.click(function() {
+		// 	References.blackLayer.show();			
+		// });
+
+		// References.blackLayer.click(function() {
+		// 	References.blackLayer.hide();
+		// });
+	}
+
+	this.defineOnOver = function()
+	{
+		References.meaning.on("mouseenter",function(e)
+		{
+			userInterface.showMeaning(controls.word.meaning, e.pageX, e.pageY);
 		})
 
+		References.meaning.on("mouseleave",function(e)
+		{
+			userInterface.hideInformation();
+		})
 	}
 
 	this.createRoundsVectors = function()
@@ -114,7 +199,7 @@ function Controls()
 	{
 		if(!this.roundFinished)
 		{
-			if(UI.UserInputIsNotEmpty() == true)
+			if(userInterface.userInputIsNotEmpty() == true)
 			{
 				oldStep = this.currentStep;
 				this.verifyWord();
@@ -126,18 +211,18 @@ function Controls()
 				else
 					this.currentStep = Step.Infinitive;
 					
-				UI.ChangeVerbTense(this.currentStep);
+				userInterface.changeVerbTense(this.currentStep);
 
 				if(oldStep == Step.Participle)
 				{
 					this.setScore();
-					UI.AddVerbInVerbList(this.word,this.wordScore,this.wordHistory);
+					userInterface.addVerbInVerbList(this.word,this.wordScore,this.wordHistory);
 					this.addWrongAnswer();
 
 					this.updateStatus();
 				}
 
-				UI.ClearUserInput();
+				userInterface.clearUserInput();
 			}
 		}	
 	}
@@ -152,15 +237,17 @@ function Controls()
 	this.resetValues = function()
 	{
 		this.cleanWrongAnswers();
-		UI.ChangeVerbTense(Step.Infinitive);
+		userInterface.changeVerbTense(Step.Infinitive);
 		this.currentStep = Step.Infinitive;
-		UI.resetWordCounter(this.currentVector.length);
-		UI.resetScore(this.currentVector.length);
+		userInterface.resetWordCounter(this.currentVector.length);
+		userInterface.resetScore(this.currentVector.length);
 		this.wordCounter = 1;
 		this.score = 0;
+		this.currentWordCounter = 0;
+		this.totalWords = this.currentVector.length;
 		this.roundFinished = false;
 
-		UI.resetWordHistory();
+		userInterface.resetWordHistory();
 		this.updateStatus();
 		this.resetDisplay();
 	}
@@ -188,7 +275,8 @@ function Controls()
 	this.setScore = function()
 	{
 		this.score += this.wordScore[0] + this.wordScore[1] + this.wordScore[2];
-		UI.IncrementScore(this.wordScore);
+		newScore = (100*this.score)/this.currentWordCounter;
+		userInterface.setScore(newScore.toFixed(2));
 	}
 
 	this.updateStatus = function()
@@ -215,9 +303,10 @@ function Controls()
 
 	this.updateUI = function()
 	{
-		this.googleSpeech(this.word.infinitive);
-		UI.setMeaning(this.word.meaning);
-		UI.IncrementWord();
+		this.playVoice();
+		userInterface.resetMeaning();
+		userInterface.incrementWord();
+		this.currentWordCounter+=3;
 	}
 	this.cleanWordScore = function()
 	{
@@ -228,7 +317,7 @@ function Controls()
 
 	this.verifyWord = function()
 	{
-		userInput = UI.getUserInput().trim();
+		userInput = userInterface.getUserInput().trim();
 		switch(this.currentStep)
 		{
 			case Step.Infinitive:
@@ -266,56 +355,95 @@ function Controls()
 
 	this.showResults = function()
 	{
+		this.detachOnclickRetryMissed();
 		if(this.wrongAnswers.length > 0)
 			this.enableRetryMissed();
 		else
 			this.disableRetryMissed();
 
-		UI.showResults();
-		UI.hideDinamic();
+		userInterface.showResults();
+		userInterface.hideDinamic();
 	}
 
 	this.enableRetryMissed = function()
 	{
-		this.attachOnclickRetryMissed();
-		UI.enableRetryMissed();
+		References.retryMissed.click(function() {
+			controls.getVectorFromWrongAnswers();
+		});
+
+		userInterface.enableRetryMissed();
 	}
 
 	this.disableRetryMissed = function()
 	{
 		this.detachOnclickRetryMissed();
-		UI.disableRetryMissed();	
-	}
-
-	this.attachOnclickRetryMissed = function()
-	{
-		UI.references.retryMissed.click(function() {CTR.attachOnClick()});
-	}
-
-	this.attachOnClick = function()
-	{
-		CTR.currentVector = CTR.wrongAnswers.slice(0);
-		CTR.resetValues();
+		userInterface.disableRetryMissed();	
 	}
 
 	this.detachOnclickRetryMissed = function()
 	{
-		UI.references.retryMissed.unbind('click');
+		References.retryMissed.unbind('click');
+	}
+
+	this.getVectorFromWrongAnswers = function()
+	{
+		this.currentVector = this.wrongAnswers.slice(0);
+		this.resetValues();
 	}
 
 	this.resetDisplay = function()
 	{
-		UI.showDinamic();
-		UI.hideResults();
+		userInterface.showDinamic();
+		userInterface.hideResults();
 	}
 
-	this.googleSpeech = function(word)
+	this.playVoice = function(word)
 	{
-		soundString = "voices/" + word + ".mp3";
-		this.playSound(soundString);
+		this.word.voice.play();
 	}
+}
 
-	this.playSound = function(soundfile) {
-		UI.references.hiddenPlayer.html("<embed src='"+soundfile+"' type='audio/mpeg' hidden='true' autostart='true' loop='false' />");
- 	}
+
+function Verb(infinitive, simple, participle, meaning)
+{
+	this.infinitive = infinitive;
+	this.simple = simple;
+	this.participle = participle;
+	this.meaning = meaning;
+	this.voice = new Audio("voices/"+infinitive+".mp3");
+}
+
+function Round(min, max)
+{
+	this.roundVector = new Array();
+
+	//max+1 because slice doesn't get the last index
+	this.roundVector = verbBucket.slice(min, max+1);
+}
+
+function loadVerbs(verbBucket)
+{
+	$.ajax({
+	    type: "GET",
+	    url: "verbs.xml",
+	    dataType: "xml",
+	    success: function(xml){
+	        $(xml).find('Verb').each(function(){
+		        var infinitive = $(this).find('Infinitive').text();
+		        var pastSimple = $(this).find('PastSimple').text();
+		        var pastParticiple = $(this).find('PastParticiple').text();
+		        var meaning = new Array();
+		        $(this).find('Meaning').each(function(){
+		        	meaning.push($(this).text());
+		        })
+		        var newVerb = new Verb(infinitive,pastSimple,pastParticiple,meaning);
+		        verbBucket.push(newVerb);
+	    	});
+
+	    	afterLoad();
+	    },
+	    error: function() {
+	    	alert("An error occurred while processing XML file.");
+	    }
+	});
 }
