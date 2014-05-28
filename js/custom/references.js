@@ -3,7 +3,6 @@ function ElementsReferences()
 	this.word = $("#word");
 	this.totalWords = $("#totalWords");
 	this.score = $("#score");
-	this.totalScore = $("#totalScore");
 	this.currentWord = $("#currentWord");
 	this.verbTense = $("#command");
 	this.userInput = $("#userInput input");

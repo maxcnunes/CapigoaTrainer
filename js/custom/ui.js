@@ -17,10 +17,9 @@ function UserInterface()
 		References.score.text(0);
 	}
 
-	this.incrementScore = function(wordScore)
+	this.setScore = function(wordScore)
 	{
-		inc = wordScore[0] + wordScore[1] + wordScore[2];
-		References.score.text(parseInt(References.score.text()) + inc);
+		References.score.text(wordScore);
 	}
 
 	this.changeCurrentWord = function(newWord)
@@ -109,7 +108,6 @@ function UserInterface()
 	this.resetScore = function(vectorSize)
 	{
 		References.score.text(0);
-		References.totalScore.text(vectorSize*3);
 	}
 
 	this.resetWordHistory = function()

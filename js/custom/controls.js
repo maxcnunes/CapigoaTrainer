@@ -2,8 +2,9 @@ function Controls()
 {
 	this.word = null;
 	this.score = 0;
-	this.wordScore = [0,0];
+	this.wordScore = [0,0,0];
 	this.wordCounter = 1;
+	this.currentWordCounter = 0;
 	this.wordHistory = [null,null,null];
 	this.currentVector = null;
 	this.currentRound = null;
@@ -242,6 +243,8 @@ function Controls()
 		userInterface.resetScore(this.currentVector.length);
 		this.wordCounter = 1;
 		this.score = 0;
+		this.currentWordCounter = 0;
+		this.totalWords = this.currentVector.length;
 		this.roundFinished = false;
 
 		userInterface.resetWordHistory();
@@ -272,7 +275,8 @@ function Controls()
 	this.setScore = function()
 	{
 		this.score += this.wordScore[0] + this.wordScore[1] + this.wordScore[2];
-		userInterface.incrementScore(this.wordScore);
+		newScore = (100*this.score)/this.currentWordCounter;
+		userInterface.setScore(newScore.toFixed(2));
 	}
 
 	this.updateStatus = function()
@@ -302,6 +306,7 @@ function Controls()
 		this.playVoice();
 		userInterface.resetMeaning();
 		userInterface.incrementWord();
+		this.currentWordCounter+=3;
 	}
 	this.cleanWordScore = function()
 	{
