@@ -539,6 +539,10 @@ footer img {
 	right: 0;
 }
 
+#abouts {
+	text-align: center;
+}
+
 #abouts img {
 	display: inline;
 	height: 60px;
@@ -551,14 +555,41 @@ footer img {
 }
 
 #abouts > div {
-	width: 750px;
+	width: 1050px;
 	margin: 0 auto;
 }
 
 #description {
 	display: inline-block;
 	width: 400px;
+	font-size: 12px;
+	padding: 0px 20px;
 
-	text-align: center;
-	font-size: 18px;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+#description div:first-child {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#shortcuts div:first-child
+{
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#shortcuts {
+	display: inline-block;
+	width: 200px;
+	font-size: 12px;
+
+	vertical-align: top;
+	margin-top: 3px;
+}
+
+#abouts > div > div{
+	display: inline-block;
 }
