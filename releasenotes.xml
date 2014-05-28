@@ -1,8 +1,0 @@
-<ReleaseNotes>
-	<Release Version="2.1" Date="18/05/2014">
-		<Note>Added release notes</Note>
-		<Note>Voices are now being loaded locally</Note>
-		<Note>Now compatible with IE 10/11 and Firefox (latest)</Note>
-		<Note>Playing audio through HTML5</Note>
-	</Release>
-</ReleaseNotes>
