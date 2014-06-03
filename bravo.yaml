@@ -1,0 +1,16 @@
+---
+
+image: 'docker.bravi.com.br/capigoa-trainer'
+production:
+  serverName: 'verbs.bravi.com.br'
+  tag: '0.0.1'
+  create:
+    AttachStdin: true
+    AttachStdout: true
+    AttachStderr: true
+    OpenStdin: true
+    Tty: true
+  run:
+    PortBindings:
+      '3000/tcp':
+        - HostIp: '127.0.0.1'
