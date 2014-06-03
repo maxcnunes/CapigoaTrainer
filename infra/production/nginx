@@ -1,5 +1,5 @@
 upstream capigoa-trainer {
-  {% for bind in binds['3000/tcp'] %}server {{ bind.HostIp }}:{{ bind.HostPort }};{% endfor %}
+  {% for bind in portBindings['3000/tcp'] %}server {{ bind.HostIp }}:{{ bind.HostPort }};{% endfor %}
 }
 
 server {
